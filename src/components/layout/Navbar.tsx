@@ -1,3 +1,7 @@
-export const Navbar = () => {
-  return <div>Navbar</div>;
-};
+const Navbar = () => {
+  return (
+    <>Navbar</>
+  )
+}
+
+export default Navbar
