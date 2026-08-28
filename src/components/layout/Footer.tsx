@@ -4,13 +4,13 @@ export default function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="w-full border-t border-neutral-200 bg-white py-8 text-neutral-900 sm:py-12"
+      className="w-full border-t border-slate-800 bg-slate-900 py-8 text-slate-100 sm:py-12"
     >
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 text-center sm:px-6 md:flex-row md:text-left lg:px-8">
         {/* Información personal y rol profesional */}
         <div className="flex flex-col gap-1">
-          <p className="text-base font-semibold text-neutral-900">Cristian Moreno</p>
-          <p className="text-sm text-neutral-600">Desarrollador Web</p>
+          <p className="text-base font-semibold text-white">Cristian Moreno</p>
+          <p className="text-sm text-slate-400">Desarrollador Web</p>
         </div>
 
         {/* Enlaces: Redes sociales y contacto */}
@@ -21,7 +21,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Perfil de GitHub (se abre en una nueva pestaña)"
-            className="inline-flex items-center gap-2 rounded-lg p-2 text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+            className="inline-flex items-center gap-2 rounded-lg p-2 text-slate-300 transition-colors hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
           >
             <svg
               className="h-5 w-5"
@@ -44,7 +44,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Perfil de LinkedIn (se abre en una nueva pestaña)"
-            className="inline-flex items-center gap-2 rounded-lg p-2 text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+            className="inline-flex items-center gap-2 rounded-lg p-2 text-slate-300 transition-colors hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
           >
             <svg
               className="h-5 w-5"
@@ -60,7 +60,7 @@ export default function Footer() {
           {/* Contacto */}
           <a
             href="#contacto"
-            className="inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+            className="inline-flex items-center rounded-lg px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
           >
             Contacto
           </a>
@@ -68,7 +68,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div>
-          <p className="text-xs text-neutral-500">
+          <p className="text-xs text-slate-400">
             &copy; {currentYear} Cristian Moreno. Todos los derechos reservados.
           </p>
         </div>

@@ -25,12 +25,12 @@ export default function Navbar() {
   };
 
   return (
-    <header role="banner" className="w-full py-4 px-4 sm:px-6 lg:px-8 flex justify-center">
-      {/* Contenedor flotante centrado con border-radius moderado y sombra sutil */}
-      <div className="w-full max-w-md md:max-w-fit rounded-xl border border-neutral-200 bg-white shadow-sm transition-all duration-200">
+    <header role="banner" className="flex w-full justify-center px-4 py-4 sm:px-6 lg:px-8">
+      {/* Contenedor flotante centrado con estilo navy surface, borde sutil y sombra suave */}
+      <div className="w-full max-w-md rounded-xl border border-slate-800 bg-slate-900/90 shadow-sm backdrop-blur-md transition-all duration-200 md:max-w-fit">
         
         {/* Cabecera / Navegación Desktop */}
-        <div className="flex items-center justify-between md:justify-center px-4 py-2 sm:px-6">
+        <div className="flex items-center justify-between px-4 py-2 sm:px-6 md:justify-center">
           
           {/* Navegación Desktop (solo enlaces centrados) */}
           <nav aria-label="Navegación principal" className="hidden md:block">
@@ -39,7 +39,7 @@ export default function Navbar() {
                 <li key={item.id}>
                   <a
                     href={item.href}
-                    className="inline-block rounded-lg px-3.5 py-1.5 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+                    className="inline-block rounded-lg px-3.5 py-1.5 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
                   >
                     {item.label}
                   </a>
@@ -50,7 +50,7 @@ export default function Navbar() {
 
           {/* Versión Móvil: Botón de apertura/cierre de menú */}
           <div className="flex w-full items-center justify-between md:hidden">
-            <span className="text-sm font-medium text-neutral-500">Navegación</span>
+            <span className="text-sm font-medium text-slate-400">Navegación</span>
             <button
               ref={toggleButtonRef}
               type="button"
@@ -58,7 +58,7 @@ export default function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
-              className="inline-flex items-center justify-center p-2 rounded-lg text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+              className="inline-flex items-center justify-center rounded-lg p-2 text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
             >
               {isOpen ? (
                 // Icono Cerrar (X)
@@ -101,7 +101,7 @@ export default function Navbar() {
           <nav
             id="mobile-menu"
             aria-label="Navegación móvil"
-            className="border-t border-neutral-100 px-3 py-2 md:hidden"
+            className="border-t border-slate-800 px-3 py-2 md:hidden"
           >
             <ul className="flex flex-col space-y-1">
               {NAV_ITEMS.map((item) => (
@@ -109,7 +109,7 @@ export default function Navbar() {
                   <a
                     href={item.href}
                     onClick={handleLinkClick}
-                    className="block rounded-lg px-3 py-2 text-center text-sm font-medium text-neutral-700 hover:bg-neutral-100 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900"
+                    className="block rounded-lg px-3 py-2 text-center text-sm font-medium text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
                   >
                     {item.label}
                   </a>

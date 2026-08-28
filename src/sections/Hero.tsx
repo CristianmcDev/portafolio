@@ -12,7 +12,7 @@ export default function Hero() {
             <img
               src="/cristianMoreno.jpg"
               alt="Fotografía de Cristian Moreno"
-              className="h-28 w-28 rounded-full border border-neutral-200 object-cover shadow-sm sm:h-32 sm:w-32 md:h-36 md:w-36"
+              className="h-28 w-28 rounded-full border border-slate-700/80 object-cover shadow-sm sm:h-32 sm:w-32 md:h-36 md:w-36"
               loading="eager"
               width="144"
               height="144"
@@ -24,32 +24,32 @@ export default function Hero() {
             <div className="space-y-1">
               <h1
                 id="hero-title"
-                className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl md:text-5xl"
+                className="text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl"
               >
                 Cristian Moreno
               </h1>
-              <p className="text-lg font-medium text-neutral-700 sm:text-xl">
+              <p className="text-lg font-medium text-slate-200 sm:text-xl">
                 Desarrollador Web
               </p>
 
-              {/* Separador sutil después del título */}
+              {/* Separador con color de acento turquesa (#7FE0D4) */}
               <div className="pt-2 pb-1" aria-hidden="true">
-                <div className="h-0.5 w-12 rounded-full bg-neutral-300" />
+                <div className="h-0.5 w-12 rounded-full bg-[#7FE0D4]" />
               </div>
             </div>
 
-            <p className="max-w-2xl text-base text-neutral-600 sm:text-lg leading-relaxed">
+            <p className="max-w-2xl text-base text-slate-300 leading-relaxed sm:text-lg">
               Especializado en la creación de aplicaciones y sitios web accesibles, intuitivos y eficientes, con un enfoque riguroso en la calidad de código y la experiencia de usuario.
             </p>
 
             {/* Enlaces de acción y redes profesionales */}
             <div className="flex w-full flex-wrap items-center gap-3 pt-2 sm:w-auto">
-              {/* Enlace/Botón CV */}
+              {/* Enlace/Botón CV (Azul Principal #1D4ED8) */}
               <a
                 href="/cv.pdf"
                 download="CV_Cristian_Moreno.pdf"
                 aria-label="Descargar currículum vitae de Cristian Moreno en formato PDF"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-neutral-900 px-4 py-2.5 text-sm font-medium text-white shadow-xs transition-colors hover:bg-neutral-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-[#1D4ED8] px-4 py-2.5 text-sm font-medium text-white shadow-xs transition-colors hover:bg-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] sm:w-auto"
               >
                 <svg
                   className="h-4 w-4"
@@ -74,7 +74,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Perfil de GitHub de Cristian Moreno (se abre en una nueva pestaña)"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-700 shadow-xs transition-colors hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[10px] border border-slate-700 bg-slate-800/80 px-4 py-2.5 text-sm font-medium text-slate-200 shadow-xs transition-colors hover:border-slate-600 hover:bg-slate-700/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] sm:w-auto"
               >
                 <svg
                   className="h-4 w-4"
@@ -97,7 +97,7 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Perfil de LinkedIn de Cristian Moreno (se abre en una nueva pestaña)"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg border border-neutral-200 bg-white px-4 py-2.5 text-sm font-medium text-neutral-700 shadow-xs transition-colors hover:bg-neutral-50 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 sm:w-auto"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[10px] border border-slate-700 bg-slate-800/80 px-4 py-2.5 text-sm font-medium text-slate-200 shadow-xs transition-colors hover:border-slate-600 hover:bg-slate-700/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] sm:w-auto"
               >
                 <svg
                   className="h-4 w-4"
