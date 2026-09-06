@@ -19,7 +19,7 @@ export default function About() {
             id="about-title"
             className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl"
           >
-            Creando soluciones web accesibles, intuitivas y eficientes
+            Desarrollo proyectos web de principio a fin
           </h2>
 
           <div className="pt-1 pb-2" aria-hidden="true">
@@ -30,13 +30,10 @@ export default function About() {
         {/* Párrafos descriptivos */}
         <div className="mt-8 space-y-5 text-base leading-relaxed text-slate-700 sm:text-lg">
           <p>
-            Soy Cristian Moreno, Desarrollador Web con un enfoque pragmático y orientado a la excelencia técnica. Me apasiona construir productos digitales que combinen una interfaz atractiva con una base sólida de accesibilidad, rendimiento y calidad de código.
+            Soy Cristian Moreno, <strong className="font-semibold text-slate-900">Desarrollador Web</strong>. Me interesa crear aplicaciones y sitios web <strong className="font-semibold text-slate-900">claros, accesibles y rápidos</strong>, cuidando tanto su funcionamiento como su diseño y estructura.
           </p>
           <p>
-            Mi trabajo se centra en el ecosistema frontend moderno, trabajando con HTML semántico, CSS contemporáneo, TypeScript y React para desarrollar experiencias fluidas que respondan de manera óptima en cualquier dispositivo y contexto de uso.
-          </p>
-          <p>
-            Tengo especial interés en participar en proyectos que representen retos interesantes: desde aplicaciones web escalables y sistemas de diseño coherentes, hasta soluciones donde la experiencia de usuario y la optimización marquen una diferencia tangible.
+            Mi experiencia combina <strong className="font-semibold text-slate-900">desarrollo profesional y proyectos propios</strong>, trabajando tanto en frontend como en el desarrollo de aplicaciones y sitios web completos. Me gusta participar en todo el proceso, desde organizar una idea y construir su interfaz hasta convertirla en un <strong className="font-semibold text-slate-900">producto funcional</strong>.
           </p>
         </div>
 
@@ -65,8 +62,8 @@ export default function About() {
             <h3 className="text-lg font-semibold text-slate-900">
               Accesibilidad Web
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              Desarrollo con estándares WCAG para garantizar que cualquier persona pueda interactuar sin barreras.
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+              Diseño y desarrollo teniendo en cuenta los estándares de accesibilidad para crear experiencias que puedan utilizar el mayor número de personas posible.
             </p>
           </div>
 
@@ -89,8 +86,8 @@ export default function About() {
             <h3 className="text-lg font-semibold text-slate-900">
               Código Limpio
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
-              Arquitectura modular, tipado estricto y optimización constante para aplicaciones rápidas y mantenibles.
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
+              Estructuras claras, componentes reutilizables y código organizado para facilitar su mantenimiento y evolución.
             </p>
           </div>
 
@@ -114,7 +111,7 @@ export default function About() {
             <h3 className="text-lg font-semibold text-slate-900">
               Diseño Intuitivo
             </h3>
-            <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            <p className="mt-2 text-sm leading-relaxed text-slate-700">
               Interfaces claras, jerarquías visuales bien definidas y navegación natural en cualquier resolución.
             </p>
           </div>
