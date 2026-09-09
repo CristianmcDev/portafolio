@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import type { IconType } from "react-icons";
 import type { Project } from "../../types/projects";
@@ -66,6 +66,15 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Mover foco al botón de cierre al abrir el modal
+  useEffect(() => {
+    if (isModalOpen) {
+      closeButtonRef.current?.focus();
+    }
+  }, [isModalOpen]);
 
   useEffect(() => {
     if (!isModalOpen) return;
@@ -73,6 +82,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsModalOpen(false);
+        triggerRef.current?.focus();
       }
     };
 
@@ -85,6 +95,13 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       document.body.style.overflow = originalOverflow;
     };
   }, [isModalOpen]);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    triggerRef.current?.focus();
+  };
 
   return (
     <article
@@ -113,10 +130,12 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         {/* Contenido visual: Captura del Proyecto o Placeholder de reserva */}
         {project.image ? (
           <button
+            ref={triggerRef}
             type="button"
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleOpenModal}
             className="group/img relative block h-[calc(100%-1.75rem)] w-full cursor-zoom-in overflow-hidden bg-slate-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             aria-label={`Ampliar imagen de ${project.title}`}
+            aria-haspopup="dialog"
           >
             <img
               src={project.image}
@@ -277,12 +296,12 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8"
             role="dialog"
             aria-modal="true"
-            aria-label={`Vista ampliada de ${project.title}`}
+            aria-labelledby={`modal-title-${project.id}`}
           >
             {/* Fondo oscuro desenfocado que cierra al hacer clic */}
             <div
               className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity"
-              onClick={() => setIsModalOpen(false)}
+              onClick={handleCloseModal}
               aria-hidden="true"
             />
 
@@ -292,14 +311,15 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
               <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/95 px-4 py-3 sm:px-5">
                 <div className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
-                  <h4 className="text-sm font-semibold text-white sm:text-base">
+                  <h4 id={`modal-title-${project.id}`} className="text-sm font-semibold text-white sm:text-base">
                     {project.title}
                   </h4>
                 </div>
 
                 <button
+                  ref={closeButtonRef}
                   type="button"
-                  onClick={() => setIsModalOpen(false)}
+                  onClick={handleCloseModal}
                   className="rounded-lg p-1.5 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   aria-label="Cerrar vista ampliada"
                 >

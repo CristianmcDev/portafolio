@@ -63,25 +63,28 @@ export function validateContactForm(data: ContactFormData): {
 }
 
 /**
- * Preparado para conectar con un servicio externo (ej. Formspree, Basin o Cloudflare Pages Function)
+ * Envía el mensaje del formulario de contacto a Formspree.
+ * Los campos name, email y message coinciden con los campos del formulario.
  */
 export async function sendContactMessage(
-  _data: ContactFormData
+  data: ContactFormData
 ): Promise<{ success: boolean; error?: string }> {
-  // Cuando conectes un endpoint de servicio externo en Cloudflare Pages, puedes sustituir
-  // esta lógica por una llamada fetch:
-  //
-  // const response = await fetch("https://tu-servicio-de-formularios.com/api/...", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(_data),
-  // });
-  // if (!response.ok) throw new Error("Error en el envío");
-
-  // Simulación con retardo realista de red
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ success: true });
-    }, 700);
+  const response = await fetch("https://formspree.io/f/maeylbry", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      message: data.message,
+    }),
   });
+
+  if (!response.ok) {
+    return { success: false, error: "Error en el envío" };
+  }
+
+  return { success: true };
 }

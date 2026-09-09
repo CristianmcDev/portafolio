@@ -1,9 +1,9 @@
 import type { Project } from "../types/projects";
-import bonsaiArtImg from "../assets/BonsaiArt.png";
-import ascolarImg from "../assets/AscolarWeb.png";
-import xvAsambleaImg from "../assets/WebXVAsamblea.png";
-import calendarImg from "../assets/CalendarWeb.jpg";
-import tesloShopImg from "../assets/TesloShop.png";
+import bonsaiArtImg from "../assets/BonsaiArt.webp";
+import ascolarImg from "../assets/AscolarWeb.webp";
+import xvAsambleaImg from "../assets/WebXVAsamblea.webp";
+import calendarImg from "../assets/CalendarWeb.webp";
+import tesloShopImg from "../assets/TesloShop.webp";
 
 export const PROJECTS: Project[] = [
   {

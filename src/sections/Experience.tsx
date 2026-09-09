@@ -31,7 +31,7 @@ export default function Experience() {
           </div>
 
           <p className="max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
-            Recorrido profesional enfocado en el desarrollo web y frontend, combinando experiencia en empresa, proyectos para entidades asociativas y gestión real.
+            Recorrido profesional en desarrollo web, abarcando tanto el lado del cliente como del servidor, con experiencia en empresa, proyectos reales para entidades asociativas y gestión continua.
           </p>
         </div>
 

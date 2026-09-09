@@ -1,6 +1,6 @@
 import type { ComplementaryRole } from "../../types/experience";
 import { TbCalendar, TbCheck } from "react-icons/tb";
-import logoAscolar from "../../assets/LogoAscolar.png";
+import logoAscolar from "../../assets/LogoAscolar.webp";
 
 interface ComplementaryRoleCardProps {
   roleData: ComplementaryRole;

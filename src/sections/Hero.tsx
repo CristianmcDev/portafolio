@@ -14,6 +14,7 @@ export default function Hero() {
               alt="Fotografía de Cristian Moreno"
               className="h-28 w-28 rounded-full border border-slate-700/80 object-cover shadow-sm sm:h-32 sm:w-32 md:h-36 md:w-36"
               loading="eager"
+              fetchPriority="high"
               width="144"
               height="144"
             />
