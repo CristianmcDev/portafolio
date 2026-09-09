@@ -126,7 +126,14 @@ export default function ContactForm() {
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-5">
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          data-gramm="false"
+          data-gramm_editor="false"
+          data-enable-grammarly="false"
+          className="mt-6 space-y-5"
+        >
           {/* Mensaje de error global si falló el envío */}
           {status === "error" && (
             <div
@@ -166,6 +173,9 @@ export default function ContactForm() {
                 aria-invalid={!!errors.name}
                 aria-describedby={errors.name ? "name-error" : undefined}
                 disabled={status === "submitting"}
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
                 autoComplete="name"
                 placeholder="Tu nombre completo"
                 className={`w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 ${
@@ -207,6 +217,9 @@ export default function ContactForm() {
                 aria-invalid={!!errors.email}
                 aria-describedby={errors.email ? "email-error" : undefined}
                 disabled={status === "submitting"}
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
                 autoComplete="email"
                 placeholder="tu-correo@ejemplo.com"
                 className={`w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 ${
@@ -248,6 +261,9 @@ export default function ContactForm() {
                 aria-invalid={!!errors.message}
                 aria-describedby={errors.message ? "message-error" : undefined}
                 disabled={status === "submitting"}
+                data-gramm="false"
+                data-gramm_editor="false"
+                data-enable-grammarly="false"
                 placeholder="Escribe aquí tu propuesta o mensaje..."
                 className={`w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 resize-y min-h-[120px] ${
                   errors.message

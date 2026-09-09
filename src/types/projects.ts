@@ -6,6 +6,7 @@ export interface ProjectLink {
   type: ProjectLinkType;
   sublabel?: string;
   ariaLabel?: string;
+  target?: "_blank" | "_self";
 }
 
 export interface Project {

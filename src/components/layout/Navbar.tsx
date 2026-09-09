@@ -3,7 +3,48 @@ import { NAV_ITEMS } from "../../data/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("inicio");
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Detectar scroll para navbar sticky y sección activa (Scroll-Spy)
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 20);
+
+      const sectionIds = NAV_ITEMS.map((item) => item.id);
+
+      // Si el usuario llega al final de la página, activar el último elemento (contacto)
+      const isAtBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 60;
+      if (isAtBottom) {
+        setActiveSection(sectionIds[sectionIds.length - 1]);
+        return;
+      }
+
+      // Umbral de compensación con el navbar sticky
+      const offset = 140;
+      let current = sectionIds[0];
+
+      for (const id of sectionIds) {
+        const element = document.getElementById(id);
+        if (element) {
+          const top = element.offsetTop - offset;
+          if (scrollY >= top) {
+            current = id;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Cerrar menú con la tecla Escape y devolver el foco al botón toggle
   useEffect(() => {
@@ -18,33 +59,52 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (id: string) => {
+    setActiveSection(id);
     if (isOpen) {
       setIsOpen(false);
     }
   };
 
   return (
-    <header role="banner" className="flex w-full justify-center px-4 py-4 sm:px-6 lg:px-8">
+    <header
+      role="banner"
+      className={`sticky top-0 z-50 flex w-full justify-center px-4 transition-all duration-300 sm:px-6 lg:px-8 ${
+        isScrolled ? "py-2.5 sm:py-3" : "py-4"
+      }`}
+    >
       {/* Contenedor flotante centrado con estilo navy surface, borde sutil y sombra suave */}
-      <div className="w-full max-w-md rounded-xl border border-slate-800 bg-slate-900/90 shadow-sm backdrop-blur-md transition-all duration-200 md:max-w-fit">
-        
+      <div
+        className={`w-full max-w-md rounded-xl border bg-slate-900/90 backdrop-blur-md transition-all duration-300 md:max-w-fit ${
+          isScrolled
+            ? "border-slate-700/80 shadow-lg shadow-black/25 bg-slate-900/95"
+            : "border-slate-800 shadow-sm"
+        }`}
+      >
         {/* Cabecera / Navegación Desktop */}
         <div className="flex items-center justify-between px-4 py-2 sm:px-6 md:justify-center">
-          
           {/* Navegación Desktop (solo enlaces centrados) */}
           <nav aria-label="Navegación principal" className="hidden md:block">
             <ul className="flex items-center gap-1 sm:gap-2">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={item.href}
-                    className="inline-block rounded-lg px-3.5 py-1.5 text-sm font-medium text-slate-300 transition-colors hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <li key={item.id}>
+                    <a
+                      href={item.href}
+                      onClick={() => handleLinkClick(item.id)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`inline-block cursor-pointer rounded-lg px-3.5 py-1.5 text-sm transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] ${
+                        isActive
+                          ? "bg-slate-800 text-[#7FE0D4] font-semibold shadow-xs ring-1 ring-slate-700/60"
+                          : "font-medium text-slate-300 hover:bg-slate-800/80 hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -58,7 +118,7 @@ export default function Navbar() {
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
-              className="inline-flex items-center justify-center rounded-lg p-2 text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
+              className="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
             >
               {isOpen ? (
                 // Icono Cerrar (X)
@@ -104,17 +164,31 @@ export default function Navbar() {
             className="border-t border-slate-800 px-3 py-2 md:hidden"
           >
             <ul className="flex flex-col space-y-1">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.id}>
-                  <a
-                    href={item.href}
-                    onClick={handleLinkClick}
-                    className="block rounded-lg px-3 py-2 text-center text-sm font-medium text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {NAV_ITEMS.map((item) => {
+                const isActive = activeSection === item.id;
+                return (
+                  <li key={item.id}>
+                    <a
+                      href={item.href}
+                      onClick={() => handleLinkClick(item.id)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`flex cursor-pointer items-center justify-between rounded-lg px-3.5 py-2 text-sm transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] ${
+                        isActive
+                          ? "bg-slate-800 text-[#7FE0D4] font-semibold border-l-2 border-[#7FE0D4]"
+                          : "font-medium text-slate-300 hover:bg-slate-800/80 hover:text-white"
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      {isActive && (
+                        <span
+                          className="h-1.5 w-1.5 rounded-full bg-[#7FE0D4]"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
         )}

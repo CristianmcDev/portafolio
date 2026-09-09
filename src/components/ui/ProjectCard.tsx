@@ -20,6 +20,7 @@ import {
   SiTailwindcss,
   SiReactquery,
   SiNestjs,
+  SiFormspree,
 } from "react-icons/si";
 import {
   TbExternalLink,
@@ -57,6 +58,7 @@ const TECH_CONFIG: Record<string, TechIconConfig> = {
   Zustand: { component: TbPaw, color: "#854D0E" },
   "TanStack Query": { component: SiReactquery, color: "#FF4154" },
   NestJS: { component: SiNestjs, color: "#E0234E" },
+  Formspree: { component: SiFormspree, color: "#E51075" },
 };
 
 interface ProjectCardProps {
@@ -260,8 +262,8 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
                 <a
                   key={`${project.id}-${link.label}`}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={link.target ?? "_blank"}
+                  rel={link.target === "_self" ? undefined : "noopener noreferrer"}
                   aria-label={link.ariaLabel || defaultAria}
                   className={
                     isWeb
