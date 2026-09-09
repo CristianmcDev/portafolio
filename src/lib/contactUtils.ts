@@ -63,28 +63,49 @@ export function validateContactForm(data: ContactFormData): {
 }
 
 /**
- * Envía el mensaje del formulario de contacto a Formspree.
+ * Envía el mensaje del formulario de contacto a Formspree directamente desde el navegador.
  * Los campos name, email y message coinciden con los campos del formulario.
  */
 export async function sendContactMessage(
   data: ContactFormData
 ): Promise<{ success: boolean; error?: string }> {
-  const response = await fetch("https://formspree.io/f/maeylbry", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({
-      name: data.name,
-      email: data.email,
-      message: data.message,
-    }),
-  });
+  try {
+    const response = await fetch("https://formspree.io/f/maeylbry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: data.name.trim(),
+        email: data.email.trim(),
+        message: data.message.trim(),
+      }),
+    });
 
-  if (!response.ok) {
-    return { success: false, error: "Error en el envío" };
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => null);
+      let errorMessage = "Error en el envío";
+      if (errorData?.errors && Array.isArray(errorData.errors)) {
+        errorMessage = errorData.errors
+          .map((err: { message?: string }) => err.message)
+          .filter(Boolean)
+          .join(", ");
+      } else if (errorData?.error) {
+        errorMessage = errorData.error;
+      }
+      return { success: false, error: errorMessage };
+    }
+
+    return { success: true };
+  } catch (error) {
+    return {
+      success: false,
+      error:
+        error instanceof Error
+          ? error.message
+          : "Error de conexión al enviar el mensaje",
+    };
   }
-
-  return { success: true };
 }
+
