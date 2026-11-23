@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
       },
       {
         label: "GitHub",
-        url: "https://github.com/CristianmcDev/cristian-portafolio",
+        url: "https://github.com/CristianmcDev/portafolio",
         type: "github",
         target: "_blank",
         ariaLabel: "Repositorio del Portfolio en GitHub (se abre en una nueva pestaña)",
