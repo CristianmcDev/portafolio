@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { NAV_ITEMS } from "../../data/navigation";
+import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -83,8 +84,8 @@ export default function Navbar() {
       >
         {/* Cabecera / Navegación Desktop */}
         <div className="flex items-center justify-between px-4 py-2 sm:px-6 md:justify-center">
-          {/* Navegación Desktop (solo enlaces centrados) */}
-          <nav aria-label="Navegación principal" className="hidden md:block">
+          {/* Navegación Desktop (enlaces centrados y botón de tema apartado) */}
+          <nav aria-label="Navegación principal" className="hidden md:flex md:items-center md:gap-1.5">
             <ul className="flex items-center gap-1 sm:gap-2">
               {NAV_ITEMS.map((item) => {
                 const isActive = activeSection === item.id;
@@ -94,7 +95,7 @@ export default function Navbar() {
                       href={item.href}
                       onClick={() => handleLinkClick(item.id)}
                       aria-current={isActive ? "page" : undefined}
-                      className={`inline-block cursor-pointer rounded-lg px-3.5 py-1.5 text-sm transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] ${
+                      className={`inline-block cursor-pointer whitespace-nowrap rounded-lg px-3.5 py-1.5 text-sm transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] ${
                         isActive
                           ? "bg-slate-800 text-[#7FE0D4] font-semibold shadow-xs ring-1 ring-slate-700/60"
                           : "font-medium text-slate-300 hover:bg-slate-800/80 hover:text-white"
@@ -106,20 +107,28 @@ export default function Navbar() {
                 );
               })}
             </ul>
+
+            {/* Separador sutil para apartar el botón de tema sin alterar el diseño */}
+            <div className="mx-1 h-4 w-px bg-slate-800" aria-hidden="true" />
+
+            {/* Botón de cambio de tema (Dark Mode) */}
+            <ThemeToggle />
           </nav>
 
-          {/* Versión Móvil: Botón de apertura/cierre de menú */}
+          {/* Versión Móvil: Botón de apertura/cierre de menú y control de tema */}
           <div className="flex w-full items-center justify-between md:hidden">
             <span className="text-sm font-medium text-slate-400">Navegación</span>
-            <button
-              ref={toggleButtonRef}
-              type="button"
-              onClick={() => setIsOpen((prev) => !prev)}
-              aria-expanded={isOpen}
-              aria-controls="mobile-menu"
-              aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
-              className="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
-            >
+            <div className="flex items-center gap-1">
+              <ThemeToggle />
+              <button
+                ref={toggleButtonRef}
+                type="button"
+                onClick={() => setIsOpen((prev) => !prev)}
+                aria-expanded={isOpen}
+                aria-controls="mobile-menu"
+                aria-label={isOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+                className="inline-flex cursor-pointer items-center justify-center rounded-lg p-2 text-slate-300 hover:bg-slate-800/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4]"
+              >
               {isOpen ? (
                 // Icono Cerrar (X)
                 <svg
@@ -155,6 +164,7 @@ export default function Navbar() {
             </button>
           </div>
         </div>
+      </div>
 
         {/* Menú Móvil Desplegable */}
         {isOpen && (

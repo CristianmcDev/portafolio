@@ -86,11 +86,11 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-xs">
-      <h3 className="text-lg font-bold text-slate-900 sm:text-xl">
+    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xs">
+      <h3 className="text-lg font-bold text-slate-900 dark:text-white sm:text-xl">
         Enviar un mensaje
       </h3>
-      <p className="mt-1 text-sm text-slate-600">
+      <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
         Rellena el siguiente formulario y me pondré en contacto contigo lo antes posible.
       </p>
 
@@ -99,7 +99,7 @@ export default function ContactForm() {
         <div
           role="status"
           aria-live="polite"
-          className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50/80 p-5 text-emerald-900"
+          className="mt-6 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/80 dark:bg-emerald-950/40 p-5 text-emerald-900 dark:text-emerald-200"
         >
           <div className="flex items-start gap-3">
             <div
@@ -109,10 +109,10 @@ export default function ContactForm() {
               <TbCheck className="h-4 w-4" />
             </div>
             <div className="space-y-2">
-              <h4 className="font-bold text-emerald-950 text-base">
+              <h4 className="font-bold text-emerald-950 dark:text-emerald-100 text-base">
                 ¡Mensaje enviado con éxito!
               </h4>
-              <p className="text-sm leading-relaxed text-emerald-800">
+              <p className="text-sm leading-relaxed text-emerald-800 dark:text-emerald-300">
                 Muchas gracias por tu mensaje. He recibido tu comunicación y te responderé lo antes posible.
               </p>
               <button
@@ -139,11 +139,11 @@ export default function ContactForm() {
             <div
               role="alert"
               aria-live="assertive"
-              className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-900"
+              className="rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50 dark:bg-rose-950/40 p-4 text-sm text-rose-900 dark:text-rose-200"
             >
               <div className="flex items-start gap-2.5">
                 <TbAlertCircle
-                  className="mt-0.5 h-5 w-5 shrink-0 text-rose-600"
+                  className="mt-0.5 h-5 w-5 shrink-0 text-rose-600 dark:text-rose-400"
                   aria-hidden="true"
                 />
                 <p>
@@ -157,9 +157,9 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="contact-name"
-              className="block text-sm font-semibold text-slate-800"
+              className="block text-sm font-semibold text-slate-800 dark:text-slate-200"
             >
-              Nombre <span className="text-rose-600" aria-hidden="true">*</span>
+              Nombre <span className="text-rose-600 dark:text-rose-400" aria-hidden="true">*</span>
             </label>
             <div className="mt-1.5 relative">
               <input
@@ -178,18 +178,18 @@ export default function ContactForm() {
                 data-enable-grammarly="false"
                 autoComplete="name"
                 placeholder="Tu nombre completo"
-                className={`w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 ${
+                className={`w-full rounded-xl border bg-white dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 ${
                   errors.name
-                    ? "border-rose-300 focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
-                    : "border-slate-300 focus-visible:border-primary focus-visible:ring-primary/20"
-                } disabled:bg-slate-50 disabled:text-slate-500`}
+                    ? "border-rose-300 dark:border-rose-600 focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
+                    : "border-slate-300 dark:border-slate-700 focus-visible:border-primary focus-visible:ring-primary/20"
+                } disabled:bg-slate-50 dark:disabled:bg-slate-800/60 disabled:text-slate-500 dark:disabled:text-slate-400`}
               />
             </div>
             {errors.name && (
               <div
                 id="name-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-700"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-700 dark:text-rose-400"
               >
                 <TbAlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{errors.name}</span>
@@ -201,9 +201,9 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="contact-email"
-              className="block text-sm font-semibold text-slate-800"
+              className="block text-sm font-semibold text-slate-800 dark:text-slate-200"
             >
-              Correo electrónico <span className="text-rose-600" aria-hidden="true">*</span>
+              Correo electrónico <span className="text-rose-600 dark:text-rose-400" aria-hidden="true">*</span>
             </label>
             <div className="mt-1.5 relative">
               <input
@@ -222,18 +222,18 @@ export default function ContactForm() {
                 data-enable-grammarly="false"
                 autoComplete="email"
                 placeholder="tu-correo@ejemplo.com"
-                className={`w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 ${
+                className={`w-full rounded-xl border bg-white dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 ${
                   errors.email
-                    ? "border-rose-300 focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
-                    : "border-slate-300 focus-visible:border-primary focus-visible:ring-primary/20"
-                } disabled:bg-slate-50 disabled:text-slate-500`}
+                    ? "border-rose-300 dark:border-rose-600 focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
+                    : "border-slate-300 dark:border-slate-700 focus-visible:border-primary focus-visible:ring-primary/20"
+                } disabled:bg-slate-50 dark:disabled:bg-slate-800/60 disabled:text-slate-500 dark:disabled:text-slate-400`}
               />
             </div>
             {errors.email && (
               <div
                 id="email-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-700"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-700 dark:text-rose-400"
               >
                 <TbAlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{errors.email}</span>
@@ -245,9 +245,9 @@ export default function ContactForm() {
           <div>
             <label
               htmlFor="contact-message"
-              className="block text-sm font-semibold text-slate-800"
+              className="block text-sm font-semibold text-slate-800 dark:text-slate-200"
             >
-              Mensaje <span className="text-rose-600" aria-hidden="true">*</span>
+              Mensaje <span className="text-rose-600 dark:text-rose-400" aria-hidden="true">*</span>
             </label>
             <div className="mt-1.5 relative">
               <textarea
@@ -265,18 +265,18 @@ export default function ContactForm() {
                 data-gramm_editor="false"
                 data-enable-grammarly="false"
                 placeholder="Escribe aquí tu propuesta o mensaje..."
-                className={`w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-slate-900 transition-colors placeholder:text-slate-400 focus:outline-none focus-visible:ring-2 resize-y min-h-[120px] ${
+                className={`w-full rounded-xl border bg-white dark:bg-slate-800 px-3.5 py-2.5 text-sm text-slate-900 dark:text-white transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus-visible:ring-2 resize-y min-h-[120px] ${
                   errors.message
-                    ? "border-rose-300 focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
-                    : "border-slate-300 focus-visible:border-primary focus-visible:ring-primary/20"
-                } disabled:bg-slate-50 disabled:text-slate-500`}
+                    ? "border-rose-300 dark:border-rose-600 focus-visible:border-rose-500 focus-visible:ring-rose-500/20"
+                    : "border-slate-300 dark:border-slate-700 focus-visible:border-primary focus-visible:ring-primary/20"
+                } disabled:bg-slate-50 dark:disabled:bg-slate-800/60 disabled:text-slate-500 dark:disabled:text-slate-400`}
               />
             </div>
             {errors.message && (
               <div
                 id="message-error"
                 role="alert"
-                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-700"
+                className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-700 dark:text-rose-400"
               >
                 <TbAlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span>{errors.message}</span>

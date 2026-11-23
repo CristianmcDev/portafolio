@@ -1,6 +1,9 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-
-type Theme = "dark" | "light" | "system";
+import { useEffect, useState, type ReactNode } from "react";
+import {
+  ThemeProviderContext,
+  type ResolvedTheme,
+  type Theme,
+} from "../hooks/useTheme";
 
 interface ThemeProviderProps {
   children: ReactNode;
@@ -8,48 +11,69 @@ interface ThemeProviderProps {
   storageKey?: string;
 }
 
-interface ThemeProviderState {
-  theme: Theme;
-  setTheme: (theme: Theme) => void;
+function getStoredTheme(storageKey: string, defaultTheme: Theme): Theme {
+  try {
+    const stored = localStorage.getItem(storageKey);
+    if (stored === "light" || stored === "dark" || stored === "system") {
+      return stored;
+    }
+  } catch {
+    // Fallback si localStorage no está disponible (modo privado estricto, etc.)
+  }
+  return defaultTheme;
 }
 
-const initialState: ThemeProviderState = {
-  theme: "light",
-  setTheme: () => null,
-};
-
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
+function getSystemTheme(): ResolvedTheme {
+  if (
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    return "dark";
+  }
+  return "light";
+}
 
 export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "portfolio-theme",
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+  const [theme, setThemeState] = useState<Theme>(() =>
+    getStoredTheme(storageKey, defaultTheme)
   );
+  const [systemTheme, setSystemTheme] = useState<ResolvedTheme>(getSystemTheme);
+
+  const resolvedTheme: ResolvedTheme =
+    theme === "system" ? systemTheme : theme;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setSystemTheme(event.matches ? "dark" : "light");
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("light", "dark");
-
-    if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-
-      root.classList.add(systemTheme);
-      return;
-    }
-
-    root.classList.add(theme);
-  }, [theme]);
+    root.classList.add(resolvedTheme);
+  }, [resolvedTheme]);
 
   const value = {
     theme,
+    resolvedTheme,
     setTheme: (newTheme: Theme) => {
-      localStorage.setItem(storageKey, newTheme);
-      setTheme(newTheme);
+      try {
+        localStorage.setItem(storageKey, newTheme);
+      } catch {
+        // Ignorar si localStorage está bloqueado
+      }
+      setThemeState(newTheme);
     },
   };
 
@@ -59,13 +83,3 @@ export function ThemeProvider({
     </ThemeProviderContext.Provider>
   );
 }
-
-export const useTheme = () => {
-  const context = useContext(ThemeProviderContext);
-
-  if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
-
-  return context;
-};

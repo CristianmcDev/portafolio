@@ -34,7 +34,8 @@ import {
 
 interface TechIconConfig {
   component: IconType;
-  color: string;
+  color?: string;
+  colorClass?: string;
 }
 
 const TECH_CONFIG: Record<string, TechIconConfig> = {
@@ -44,7 +45,7 @@ const TECH_CONFIG: Record<string, TechIconConfig> = {
   Redux: { component: SiRedux, color: "#764ABC" },
   Bootstrap: { component: SiBootstrap, color: "#7952B3" },
   "Node.js": { component: SiNodedotjs, color: "#5FA04E" },
-  Express: { component: SiExpress, color: "#111827" },
+  Express: { component: SiExpress, colorClass: "text-slate-900 dark:text-slate-100" },
   MongoDB: { component: SiMongodb, color: "#13AA52" },
   WordPress: { component: SiWordpress, color: "#21759B" },
   Elementor: { component: SiElementor, color: "#92003B" },
@@ -52,7 +53,7 @@ const TECH_CONFIG: Record<string, TechIconConfig> = {
   "Material UI": { component: SiMui, color: "#007FFF" },
   "React Router": { component: SiReactrouter, color: "#CA4245" },
   EmailJS: { component: TbMail, color: "#EA4335" },
-  JWT: { component: SiJsonwebtokens, color: "#111827" },
+  JWT: { component: SiJsonwebtokens, colorClass: "text-slate-900 dark:text-slate-100" },
   TypeScript: { component: SiTypescript, color: "#3178C6" },
   "Tailwind CSS": { component: SiTailwindcss, color: "#06B6D4" },
   Zustand: { component: TbPaw, color: "#854D0E" },
@@ -85,6 +86,10 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       if (e.key === "Escape") {
         setIsModalOpen(false);
         triggerRef.current?.focus();
+      } else if (e.key === "Tab") {
+        // Focus trap: mantener el foco dentro del modal
+        e.preventDefault();
+        closeButtonRef.current?.focus();
       }
     };
 
@@ -108,22 +113,22 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
   return (
     <article
       aria-labelledby={`project-${project.id}-title`}
-      className={`group flex flex-col justify-between overflow-hidden rounded-2xl border bg-white shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
+      className={`group flex flex-col justify-between overflow-hidden rounded-2xl border bg-white dark:bg-slate-900 shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
         featured
-          ? "border-slate-300/90 hover:border-primary/40 md:col-span-1"
-          : "border-slate-200/90 hover:border-slate-300"
+          ? "border-slate-300/90 dark:border-slate-700/80 hover:border-primary/40 md:col-span-1"
+          : "border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700"
       }`}
     >
       {/* Zona visual / Placeholder de Captura del Proyecto */}
-      <div className="relative aspect-16/10 w-full overflow-hidden border-b border-slate-200/80 bg-slate-100/90 sm:aspect-16/9">
+      <div className="relative aspect-16/10 w-full overflow-hidden border-b border-slate-200/80 dark:border-slate-800 bg-slate-100/90 dark:bg-slate-950/80 sm:aspect-16/9">
         {/* Mockup superior tipo ventana de navegador */}
-        <div className="flex h-7 items-center justify-between border-b border-slate-200/60 bg-slate-200/50 px-3">
+        <div className="flex h-7 items-center justify-between border-b border-slate-200/60 dark:border-slate-800/80 bg-slate-200/50 dark:bg-slate-800/70 px-3">
           <div className="flex items-center gap-1.5" aria-hidden="true">
-            <span className="h-2 w-2 rounded-full bg-slate-300" />
-            <span className="h-2 w-2 rounded-full bg-slate-300" />
-            <span className="h-2 w-2 rounded-full bg-slate-300" />
+            <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700" />
+            <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700" />
+            <span className="h-2 w-2 rounded-full bg-slate-300 dark:bg-slate-700" />
           </div>
-          <span className="truncate text-[10px] font-mono font-medium text-slate-500">
+          <span className="truncate text-[10px] font-mono font-medium text-slate-500 dark:text-slate-400">
             {project.id}.cristianmoreno.dev
           </span>
           <div className="w-8" aria-hidden="true" />
@@ -135,7 +140,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             ref={triggerRef}
             type="button"
             onClick={handleOpenModal}
-            className="group/img relative block h-[calc(100%-1.75rem)] w-full cursor-zoom-in overflow-hidden bg-slate-100 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="group/img relative block h-[calc(100%-1.75rem)] w-full cursor-zoom-in overflow-hidden bg-slate-100 dark:bg-slate-950 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             aria-label={`Ampliar imagen de ${project.title}`}
             aria-haspopup="dialog"
           >
@@ -160,7 +165,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         ) : (
           <div className="flex h-[calc(100%-1.75rem)] flex-col items-center justify-center p-4 text-center">
             <div
-              className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-2xs transition-transform duration-200 group-hover:scale-105"
+              className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 shadow-2xs transition-transform duration-200 group-hover:scale-105"
               aria-hidden="true"
             >
               {project.links.some((l) => l.type === "web") ? (
@@ -169,10 +174,10 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
                 <TbCode className="h-5 w-5 text-primary" />
               )}
             </div>
-            <span className="text-xs font-semibold text-slate-700">
+            <span className="text-xs font-semibold text-slate-700 dark:text-slate-300">
               {project.imagePlaceholderText || project.title}
             </span>
-            <span className="mt-0.5 text-[11px] text-slate-500">
+            <span className="mt-0.5 text-[11px] text-slate-500 dark:text-slate-400">
               Espacio reservado para vista previa
             </span>
           </div>
@@ -181,7 +186,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         {/* Badge flotante de proyecto destacado / en producción cuando corresponda */}
         {project.highlightBadge && (
           <div className="absolute top-9 right-3 z-10">
-            <span className="inline-flex items-center gap-1 rounded-full border border-teal-600/20 bg-teal-50 px-2.5 py-0.5 text-[11px] font-bold text-teal-800 shadow-2xs backdrop-blur-xs">
+            <span className="inline-flex items-center gap-1 rounded-full border border-teal-600/20 dark:border-teal-400/30 bg-teal-50 dark:bg-teal-950/60 px-2.5 py-0.5 text-[11px] font-bold text-teal-800 dark:text-teal-300 shadow-2xs backdrop-blur-xs">
               <span className="h-1.5 w-1.5 rounded-full bg-[#7FE0D4]" aria-hidden="true" />
               {project.highlightBadge}
             </span>
@@ -193,11 +198,11 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       <div className="flex flex-1 flex-col p-5 sm:p-6">
         {/* Metadatos: Tipo y Año */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="inline-flex items-center rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+          <span className="inline-flex items-center rounded-md bg-slate-100 dark:bg-slate-800 px-2.5 py-1 text-xs font-medium text-slate-700 dark:text-slate-300">
             {project.type}
           </span>
           {project.year && (
-            <span className="inline-flex items-center rounded-md border border-slate-200 bg-white px-2 py-0.5 text-xs font-semibold text-slate-600">
+            <span className="inline-flex items-center rounded-md border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-2 py-0.5 text-xs font-semibold text-slate-600 dark:text-slate-300">
               {project.year}
             </span>
           )}
@@ -206,39 +211,41 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         {/* Título */}
         <h3
           id={`project-${project.id}-title`}
-          className="mt-3 text-lg font-bold tracking-tight text-slate-900 sm:text-xl"
+          className="mt-3 text-lg font-bold tracking-tight text-slate-900 dark:text-white sm:text-xl"
         >
           {project.title}
         </h3>
 
         {/* Descripción: Qué resuelve el proyecto */}
-        <p className="mt-2.5 text-sm leading-relaxed text-slate-600">
+        <p className="mt-2.5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
           {project.description}
         </p>
 
         {/* Tecnologías utilizadas con logos oficiales y accesibilidad WCAG 2.2 AA */}
         {project.technologies && project.technologies.length > 0 && (
-          <div className="mt-5 border-t border-slate-100 pt-4">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+          <div className="mt-5 border-t border-slate-100 dark:border-slate-800/80 pt-4">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
               Tecnologías clave
             </span>
             <ul
-              className="mt-2 flex flex-wrap gap-1.5"
+              className="mt-2 mb-4 flex flex-wrap gap-1.5"
               aria-label={`Tecnologías utilizadas en ${project.title}`}
             >
               {project.technologies.map((tech) => {
                 const config = TECH_CONFIG[tech];
                 const IconComponent = config?.component || TbCode;
-                const iconColor = config?.color || "#475569";
+                const iconColor = config?.color;
+                const iconColorClass =
+                  config?.colorClass ?? (!iconColor ? "text-slate-600 dark:text-slate-400" : "");
 
                 return (
                   <li
                     key={tech}
-                    className="inline-flex items-center gap-1.5 mb-3 rounded-lg border border-slate-200/90 bg-slate-50/90 px-2.5 py-1 text-xs font-semibold text-slate-800 shadow-2xs transition-all hover:border-slate-300 hover:bg-white"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200/90 dark:border-slate-700/80 bg-slate-50/90 dark:bg-slate-800/80 px-2.5 py-1 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs transition-all hover:border-slate-300 dark:hover:border-slate-600 hover:bg-white dark:hover:bg-slate-700"
                   >
                     <IconComponent
-                      className="h-3.5 w-3.5 shrink-0"
-                      style={{ color: iconColor }}
+                      className={`h-3.5 w-3.5 shrink-0 ${iconColorClass}`}
+                      style={iconColor ? { color: iconColor } : undefined}
                       aria-hidden="true"
                     />
                     <span>{tech}</span>
@@ -250,7 +257,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         )}
 
         {/* Enlaces de Acción (GitHub y/o Web) */}
-        <div className="mt-auto border-t border-slate-100 pt-4">
+        <div className="mt-auto border-t border-slate-100 dark:border-slate-800/80 pt-4">
           <div className="flex flex-wrap items-center gap-2">
             {project.links.map((link) => {
               const isWeb = link.type === "web";
@@ -268,7 +275,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
                   className={
                     isWeb
                       ? "inline-flex items-center gap-1.5 rounded-[10px] bg-[#1D4ED8] px-3.5 py-2 text-xs font-semibold text-white shadow-xs transition-colors hover:bg-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D4ED8] sm:text-sm"
-                      : "inline-flex items-center gap-1.5 rounded-[10px] border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 shadow-2xs transition-colors hover:border-slate-400 hover:bg-slate-50 hover:text-slate-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D4ED8] sm:text-sm"
+                      : "inline-flex items-center gap-1.5 rounded-[10px] border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-2xs transition-colors hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-950 dark:hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1D4ED8] sm:text-sm"
                   }
                 >
                   {isWeb ? (

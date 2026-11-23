@@ -6,30 +6,30 @@ export default function Contact() {
     <section
       id="contacto"
       aria-labelledby="contact-title"
-      className="w-full border-t border-slate-200 bg-[#F8FAFC] py-16 text-slate-900 sm:py-20 md:py-24"
+      className="w-full border-t border-slate-200 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-900 py-16 text-slate-900 dark:text-slate-100 sm:py-20 md:py-24"
     >
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Cabecera de la sección */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
-            <span className="text-xs font-bold uppercase tracking-wider text-primary">
+            <span className="h-2 w-2 rounded-full bg-primary dark:bg-[#7FE0D4]" aria-hidden="true" />
+            <span className="text-xs font-bold uppercase tracking-wider text-primary dark:text-[#7FE0D4]">
               Contacto
             </span>
           </div>
 
           <h2
             id="contact-title"
-            className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl md:text-4xl"
+            className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl md:text-4xl"
           >
             ¿Hablamos?
           </h2>
 
           <div className="pt-1 pb-2" aria-hidden="true">
-            <div className="h-0.5 w-12 rounded-full bg-primary" />
+            <div className="h-0.5 w-12 rounded-full bg-primary dark:bg-[#7FE0D4]" />
           </div>
 
-          <p className="max-w-3xl text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="max-w-3xl text-base leading-relaxed text-slate-600 dark:text-slate-400 sm:text-lg">
            Si estás buscando un desarrollador web para incorporarse a un equipo o tienes un proyecto en mente, puedes contactar conmigo mediante el formulario o directamente por email.
           </p>
         </div>

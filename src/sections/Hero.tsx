@@ -1,3 +1,5 @@
+import cristianMorenoImg from "../assets/cristianMoreno.webp";
+
 export default function Hero() {
   return (
     <section
@@ -10,7 +12,7 @@ export default function Hero() {
           {/* Foto de perfil a la izquierda */}
           <div className="shrink-0">
             <img
-              src="/cristianMoreno.jpg"
+              src={cristianMorenoImg}
               alt="Fotografía de Cristian Moreno"
               className="h-28 w-28 rounded-full border border-slate-700/80 object-cover shadow-sm sm:h-32 sm:w-32 md:h-36 md:w-36"
               loading="eager"
@@ -47,7 +49,7 @@ export default function Hero() {
             <div className="flex w-full flex-wrap items-center gap-3 pt-2 sm:w-auto">
               {/* Enlace/Botón CV (Azul Principal #1D4ED8) */}
               <a
-                href="/cv.pdf"
+                href="/CV-CristianMoreno.pdf"
                 download="CV_Cristian_Moreno.pdf"
                 aria-label="Descargar currículum vitae de Cristian Moreno en formato PDF"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-[#1D4ED8] px-4 py-2.5 text-sm font-medium text-white shadow-xs transition-colors hover:bg-[#2563EB] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7FE0D4] sm:w-auto"
